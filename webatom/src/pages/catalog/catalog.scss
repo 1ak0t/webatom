@@ -1,0 +1,27 @@
+.catalog {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1200px;
+  margin: 0 auto;
+  gap: 35px;
+  justify-content: center;
+
+  &__title {
+    text-align: center;
+    margin: 60px 0;
+  }
+
+  &__add-product {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    background-color: #4182fc;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+}
