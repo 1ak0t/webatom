@@ -19,7 +19,8 @@ function Catalog() {
   }
 
   const findProductById = (data:ProductsType, id: string) => {
-    return data.find((prod) => prod.id == id);
+
+    return data.find((prod) => String(prod.id) === String(id));
   }
 
   if (isLoading) {

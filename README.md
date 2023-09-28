@@ -1,3 +1,3 @@
 # webatom
 
-gleeful-horse-ecf4b1.netlify.app
+https://gleeful-horse-ecf4b1.netlify.app/
