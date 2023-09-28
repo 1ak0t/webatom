@@ -3,7 +3,6 @@ import {ProductType} from '../../types/product.types';
 import {usePostProduct} from '../../hooks/rest';
 import {useRef} from 'react';
 import {nanoid} from 'nanoid';
-import {useAxios} from '../../hooks/axios';
 import './add-product-form.scss';
 
 function AddProductForm() {
