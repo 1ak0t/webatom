@@ -21,7 +21,7 @@ export const productPostController = async (axios: ContextValue, product: Produc
   const response = await axios?.post(
     `https://fakestoreapi.com/products/`
   );
-
+  console.log(response);
   return product;
 }
 
@@ -29,7 +29,7 @@ export const productPutController = async (axios: ContextValue, product: Product
   const response = await axios?.put(
     `https://fakestoreapi.com/products/${product.id}`
   );
-
+  console.log(response);
   return product;
 }
 

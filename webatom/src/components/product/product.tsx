@@ -36,8 +36,8 @@ function Product({product, setIdForChange}: ProductProps) {
 
   const onSaveButtonClickHandler: SubmitHandler<ProductType> = (data) => {
     const updatedProduct: ProductType = {...product, ...data};
-    update(updatedProduct);
     setChangeStatus(false);
+    update(updatedProduct);
     setIdForChange('');
   }
 

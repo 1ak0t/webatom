@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet-async';
-import {usePostProduct, useProducts} from '../../hooks/rest';
+import {useProducts} from '../../hooks/rest';
 import {ProductsType, ProductType} from '../../types/product.types';
 import ProductCard from '../../components/product-card/product-card';
 import './catalog.scss'
@@ -19,7 +19,7 @@ function Catalog() {
   }
 
   const findProductById = (data:ProductsType, id: string) => {
-    return data.find((prod) => prod.id === id);
+    return data.find((prod) => prod.id == id);
   }
 
   if (isLoading) {
