@@ -14,7 +14,6 @@ function AddProductForm() {
     reset
   } = useForm<ProductType>();
 
-  const axios = useAxios();
   const addProductBox = useRef<HTMLDivElement | null>(null);
   const {mutate: send} = usePostProduct();
 
