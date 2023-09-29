@@ -8,7 +8,7 @@ type ProductCardProps = {
 }
 
 function ProductCard({product, setIdForChange}: ProductCardProps) {
-  const cardRef = useRef<HTMLElement>(null)
+  const cardRef = useRef<HTMLElement>(null);
 
   const onCardClickHandler = () => {
     if (cardRef.current) {
