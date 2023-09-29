@@ -18,7 +18,7 @@ function Product({product, setIdForChange}: ProductProps) {
     setValue
   } = useForm<ProductType>();
 
-  const {mutate: update} = usePutProduct();
+  const {mutate: update, status} = usePutProduct();
   const {mutate: deleteProduct} = useDeleteProduct();
 
   const onCloseButtonClickHandler = () => {
@@ -39,7 +39,6 @@ function Product({product, setIdForChange}: ProductProps) {
     const updatedProduct: ProductType = {...product, ...data};
     update(updatedProduct);
     setChangeStatus(false);
-    // setIdForChange('');
   }
 
   const onDeleteButtonClickHandler = () => {
@@ -48,7 +47,21 @@ function Product({product, setIdForChange}: ProductProps) {
     }
   }
 
+  if (status === "success") {
+    setIdForChange('');
+  }
+
   if (product && !changeStatus) {
+    if (status === "loading") {
+      return (
+        <div className="product">
+          <article className="product__box">
+            Изменяем...
+          </article>
+        </div>
+      );
+    }
+
     return (
       <div className="product">
         <article className="product__box">
