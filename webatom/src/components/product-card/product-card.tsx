@@ -8,7 +8,6 @@ type ProductCardProps = {
 }
 
 function ProductCard({product, setIdForChange}: ProductCardProps) {
-  const deleteButton = useRef<HTMLButtonElement>(null);
   const cardRef = useRef<HTMLElement>(null)
 
   const onCardClickHandler = () => {
