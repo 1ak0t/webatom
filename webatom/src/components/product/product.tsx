@@ -2,7 +2,7 @@ import {ProductType} from '../../types/product.types';
 import React, {useState} from 'react';
 import './product.scss';
 import {SubmitHandler, useForm} from 'react-hook-form';
-import {usePutProduct} from '../../hooks/rest';
+import {useDeleteProduct, usePutProduct} from '../../hooks/rest';
 
 type ProductProps =  {
   product: ProductType | undefined;
@@ -19,6 +19,7 @@ function Product({product, setIdForChange}: ProductProps) {
   } = useForm<ProductType>();
 
   const {mutate: update} = usePutProduct();
+  const {mutate: deleteProduct} = useDeleteProduct();
 
   const onCloseButtonClickHandler = () => {
     setIdForChange('');
@@ -41,6 +42,12 @@ function Product({product, setIdForChange}: ProductProps) {
     setIdForChange('');
   }
 
+  const onDeleteButtonClickHandler = () => {
+    if (product?.id) {
+      deleteProduct(product.id);
+    }
+  }
+
   if (product && !changeStatus) {
     return (
       <div className="product">
@@ -52,6 +59,7 @@ function Product({product, setIdForChange}: ProductProps) {
           <div className="product__price">{product.price}</div>
           <div className="product__rating">{product.rating.rate}</div>
           <button onClick={onChangeButtonClickHandler} className="product__change">Изменить</button>
+          <button onClick={onDeleteButtonClickHandler} className="product__close">Удалить</button>
           <button onClick={onCloseButtonClickHandler} className="product__close">Закрыть</button>
         </article>
       </div>

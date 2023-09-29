@@ -1,7 +1,7 @@
 import {SubmitHandler, useForm} from 'react-hook-form';
 import {ProductType} from '../../types/product.types';
 import {usePostProduct} from '../../hooks/rest';
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
 import {nanoid} from 'nanoid';
 import './add-product-form.scss';
 
@@ -15,9 +15,24 @@ function AddProductForm() {
 
   const addProductBox = useRef<HTMLDivElement | null>(null);
   const {mutate: send} = usePostProduct();
+  const [img, setImg] = useState('');
+
+  const convertToBase64 = (img: any) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(img);
+    reader.onloadend = () => {
+      if (reader.result) {
+        setImg(reader.result.toString());
+      }
+    }
+  }
 
   const onSubmit: SubmitHandler<ProductType> = (data) => {
     const newProduct = {...data, id: nanoid(), rating: {rate: '4', count: '200'}};
+    if (data.image.length > 0) {
+      convertToBase64(data.image[0]);
+    }
+    newProduct.image = img;
     send(newProduct);
     reset();
     addProductBox.current?.classList.add('add-product--inactive');

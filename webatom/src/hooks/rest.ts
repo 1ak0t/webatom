@@ -58,10 +58,6 @@ export function usePutProduct() {
         }
         return oldProducts;
       });
-      client.invalidateQueries({
-        queryKey: ['products'],
-        refetchType: 'none',
-      })
     }
   });
 }
@@ -79,10 +75,6 @@ export function useDeleteProduct () {
         })
         return filteredProd;
       });
-      client.invalidateQueries({
-        queryKey: ['products'],
-        refetchType: 'none',
-      })
     }
   });
 }
