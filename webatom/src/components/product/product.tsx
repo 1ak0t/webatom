@@ -2,7 +2,7 @@ import {ProductType} from '../../types/product.types';
 import React, {useState} from 'react';
 import './product.scss';
 import {SubmitHandler, useForm} from 'react-hook-form';
-import {usePutProduct} from '../../hooks/rest';
+import {useDeleteProduct, usePutProduct} from '../../hooks/rest';
 
 type ProductProps =  {
   product: ProductType | undefined;
@@ -18,7 +18,8 @@ function Product({product, setIdForChange}: ProductProps) {
     setValue
   } = useForm<ProductType>();
 
-  const {mutate: update} = usePutProduct();
+  const {mutate: update, status} = usePutProduct();
+  const {mutate: deleteProduct} = useDeleteProduct();
 
   const onCloseButtonClickHandler = () => {
     setIdForChange('');
@@ -36,12 +37,31 @@ function Product({product, setIdForChange}: ProductProps) {
 
   const onSaveButtonClickHandler: SubmitHandler<ProductType> = (data) => {
     const updatedProduct: ProductType = {...product, ...data};
-    setChangeStatus(false);
     update(updatedProduct);
+    setChangeStatus(false);
+  }
+
+  const onDeleteButtonClickHandler = () => {
+    if (product?.id) {
+      deleteProduct(product.id);
+    }
+  }
+
+  if (status === "success") {
     setIdForChange('');
   }
 
   if (product && !changeStatus) {
+    if (status === "loading") {
+      return (
+        <div className="product">
+          <article className="product__box">
+            Изменяем...
+          </article>
+        </div>
+      );
+    }
+
     return (
       <div className="product">
         <article className="product__box">
@@ -52,6 +72,7 @@ function Product({product, setIdForChange}: ProductProps) {
           <div className="product__price">{product.price}</div>
           <div className="product__rating">{product.rating.rate}</div>
           <button onClick={onChangeButtonClickHandler} className="product__change">Изменить</button>
+          <button onClick={onDeleteButtonClickHandler} className="product__close">Удалить</button>
           <button onClick={onCloseButtonClickHandler} className="product__close">Закрыть</button>
         </article>
       </div>

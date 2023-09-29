@@ -1,7 +1,6 @@
 import {ProductType} from '../../types/product.types';
 import './product-card.scss';
 import React, {useRef} from 'react';
-import {useDeleteProduct} from '../../hooks/rest';
 
 type ProductCardProps = {
   product: ProductType
@@ -9,16 +8,7 @@ type ProductCardProps = {
 }
 
 function ProductCard({product, setIdForChange}: ProductCardProps) {
-  const deleteButton = useRef<HTMLButtonElement>(null);
-  const cardRef = useRef<HTMLElement>(null)
-  const {mutate: deleteProduct} = useDeleteProduct();
-
-  const onDeleteButtonClickHandler = () => {
-    if (deleteButton.current?.parentElement) {
-      const productId = deleteButton.current?.parentElement.id;
-      deleteProduct(productId);
-    }
-  }
+  const cardRef = useRef<HTMLElement>(null);
 
   const onCardClickHandler = () => {
     if (cardRef.current) {
@@ -34,7 +24,6 @@ function ProductCard({product, setIdForChange}: ProductCardProps) {
       <span className="product-card__category">{product.category}</span>
       <span className="product-card__price">{product.price} &#8381;</span>
       <span className="product-card__rate">{product.rating.rate}</span>
-      <button ref={deleteButton} onClick={onDeleteButtonClickHandler} className="product-card__delete">X</button>
     </article>
   );
 }
